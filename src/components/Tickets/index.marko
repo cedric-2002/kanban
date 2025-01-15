@@ -1,0 +1,45 @@
+
+<for|ticket| of=input.tickets>
+  <div
+    class="ticket"
+    draggable="true"
+    data-priority=${ticket.PriorityID}
+    ondragstart("handleDragStart", ticket.TicketID)
+    onclick("openFilterModal", ticket.TicketID)
+  >
+    <h3>${ticket.Title}</h3>
+    <p>#${ticket.TicketNumber}</p>
+    <p>Filter: ${ticket.Filters || "Keine Filter"}</p>
+
+    <if(ticket.showModal)>
+      <div class="modal">
+        <div class="modal-content">
+          <span
+            class="close"
+            onclick("closeFilterModal", ticket.TicketID)
+          >
+            &times;
+          </span>
+          <form>
+            <label for="filter-select">Filter auswählen:</label>
+            <select
+              id="filter-select"
+              multiple
+              onchange("saveFilter", ticket.TicketID, this.value)
+            >
+              <option value="none">Kein Filter</option>
+              <for|filter| of=filters.filters>
+                <option value=${filter.name}>
+                  ${filter.name}
+                </option>
+              </for>
+            </select>
+          </form>
+        </div>
+      </div>
+    </if>
+  </div>
+</for>
+
+<style src="./style.css" />
+<script src="./component.js" />

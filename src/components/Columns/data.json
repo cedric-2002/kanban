@@ -1,0 +1,190 @@
+{
+  "columns": [
+    {
+      "Board": "Board 1",
+      "maxTickets": "15",
+      "showBoardName": true,
+      "filters": [],
+      "columns": {
+        "To do": {
+          "name": "In Progress",
+          "maxTickets": "8",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "In Progress": {
+          "name": "To do",
+          "maxTickets": "13",
+          "ticketOrder": "desc",
+          "notifyOverflow": true,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Board 4",
+      "maxTickets": "unbegrenzt",
+      "showBoardName": false,
+      "filters": [],
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_2": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Neues Board",
+      "maxTickets": "unbegrenzt",
+      "showBoardName": true,
+      "filters": [],
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Board 3",
+      "maxTickets": "unbegrenzt",
+      "showBoardName": true,
+      "filters": [],
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_2": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_3": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_4": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Board 2",
+      "maxTickets": "unbegrenzt",
+      "showBoardName": true,
+      "filters": [],
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_2": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_3": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        },
+        "Column_4": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Neues Board",
+      "maxTickets": "unbegrenzt",
+      "showBoardName": true,
+      "filters": [],
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false,
+          "filters": []
+        }
+      }
+    },
+    {
+      "Board": "Neues Board",
+      "columns": {
+        "Column_1": {
+          "name": "Neue Spalte",
+          "maxTickets": "unbegrenzt",
+          "ticketOrder": "normal",
+          "notifyOverflow": false,
+          "hideColumn": false
+        }
+      }
+    }
+  ],
+  "filters": [
+    {
+      "name": "Filter 1",
+      "quickFilter": true
+    },
+    {
+      "name": "Filter 2",
+      "quickFilter": false
+    },
+    {
+      "name": "Filter 3",
+      "quickFilter": true
+    }
+  ]
+}

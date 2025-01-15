@@ -1,0 +1,69 @@
+<template>
+  <div id="special-board">
+    <div class="board-container">
+      <div class="board-header">
+        <h2 class="board-title">Nicht zugewiesene Tickets</h2>
+      </div>
+      <div class="kanban-board">
+        <div class="kanban-block">
+          <div
+            class="kanban-block-body"
+            data-column="Nicht zugewiesen"
+            data-board="Nicht zugewiesene Tickets"
+            on-dragover("handleDragOver") 
+            on-drop("handleDrop")
+          >
+            <@Tickets column="Nicht zugewiesen" board="Nicht zugewiesene Tickets" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <for|board| of=state.columns>
+    <if(board.showBoardName)>
+      <div class="board-container">
+        <div class="board-header">
+          <h2 class="board-title">${board.Board}</h2>
+          <if(board.maxTickets !== "unbegrenzt")>
+            <span class="board-max-tickets" data-max-tickets="${board.maxTickets}">Max Tickets: ${board.maxTickets}</span>
+          </if>
+        </div>
+        <div class="kanban-board">
+          <for|columnName, index| of=Object.keys(board.columns)>
+            <if(!board.columns[columnName].hideColumn)>
+              <div class="kanban-block">
+                <div class="kanban-block-header">
+                  <button
+                    class="sort-button"
+                    data-column="${board.columns[columnName].name}"
+                    data-board="${board.Board}"
+                    on-click("handleSortClick", index)
+                  >
+                    ${board.columns[columnName].name}
+                    <span class="sort-indicator">↕</span>
+                    <if(board.columns[columnName].maxTickets !== "unbegrenzt")>
+                      <span class="column-max-tickets" data-max-tickets="${board.columns[columnName].maxTickets}">Max: ${board.columns[columnName].maxTickets}</span>
+                    </if>
+                  </button>
+                </div>
+                <div
+                  class="kanban-block-body"
+                  data-column="${board.columns[columnName].name}"
+                  data-board="${board.Board}"
+                  on-dragover("handleDragOver")
+                  on-drop("handleDrop")
+                >
+                  <@Tickets column="${board.columns[columnName].name}" board="${board.Board}" />
+                </div>
+              </div>
+            </if>
+          </for>
+        </div>
+      </div>
+    </if>
+  </for>
+</template>
+
+<style src="./style.css" />
+<script src="./component.js" />

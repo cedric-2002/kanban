@@ -1,0 +1,64 @@
+.board-container {
+    margin-bottom: 2rem;
+  }
+  
+  .board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .board-title {
+    flex-grow: 1;
+    text-align: center; 
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .board-max-tickets {
+    font-size: 1rem;
+    color: #888;
+    font-weight: normal;
+    margin-right: 1rem;
+  }
+  
+  .kanban-board {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .kanban-block {
+    background-color: #f4f5f7; 
+    border: 1px solid #dfe1e6;
+    border-radius: 3px;
+    width: 25%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .kanban-block.drag-over {
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+  }
+  
+  .sort-button {
+    background-color: #091e42;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .sort-indicator {
+    float: right;
+  }
+  

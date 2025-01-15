@@ -1,0 +1,58 @@
+
+
+<div id="sidebar" class="sidebar ${state.isOpen ? 'open' : ''}">
+  <div class="sidebar-content">
+    <h2>Einstellungen</h2>
+
+    <!-- Boards verwalten -->
+    <div id="board-settings">
+      <h3>Boards verwalten</h3>
+      <ul id="board-list">
+        <for|board, index| of=state.boards>
+          <li class="board-item" data-board-index="${index}" draggable="true">
+            <input type="text" value="${board.Board}" class="board-name-input" readonly />
+            <button class="edit-board" onClick('editBoard', index)>&#9881;</button>
+            <button class="delete-board" onClick('deleteBoard', index)>&#128465;</button>
+          </li>
+        </for>
+        <li id="add-board">
+          <button class="add-board-btn" onClick('addBoard')>+ Neues Board hinzufügen</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Spalten verwalten -->
+    <div id="column-settings" style="display: none;">
+      <h3>Spalten verwalten</h3>
+      <ul id="column-list">
+        <for|column, index| of=state.columns>
+          <li class="column-item" data-column-index="${index}" draggable="true">
+            <input type="text" value="${column.name}" class="column-name-input" readonly />
+            <button class="edit-column" onClick('editColumn', index)>&#9881;</button>
+            <button class="delete-column" onClick('deleteColumn', index)>&#128465;</button>
+          </li>
+        </for>
+      </ul>
+    </div>
+
+    <!-- Filter verwalten -->
+    <div id="filter-settings">
+      <h3>Filter verwalten</h3>
+      <ul id="filter-list">
+        <for|filter, index| of=state.filters>
+          <li class="filter-item" data-filter-index="${index}">
+            <input type="text" value="${filter.name}" class="filter-name-input" readonly />
+            <button class="edit-filter" onClick('editFilter', index)>&#9881;</button>
+            <button class="delete-filter" onClick('deleteFilter', index)>&#128465;</button>
+          </li>
+        </for>
+        <li id="add-filter">
+          <button class="add-filter-btn" onClick('addFilter')>+ Neuen Filter hinzufügen</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style src="./style.css" />
+<script src="./component.js" />

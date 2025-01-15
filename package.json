@@ -1,19 +1,25 @@
 {
   "name": "kanban",
-  "description": "The default Marko starter app",
   "version": "1.0.0",
-  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
   "dependencies": {
-    "marko": "^5.33.5"
+    "@marko/compiler": "^5.37.4",
+    "@marko/express": "^2.1.0",
+    "@marko/webpack": "^10.0.0",
+    "compression": "^1.7.4",
+    "css-loader": "^7.1.2",
+    "express": "^4.19.2",
+    "marko": "^5.35.8",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
-    "@marko/run": "^0.4.3"
-  },
-  "private": true,
-  "scripts": {
-    "dev": "marko-run",
-    "build": "marko-run build",
-    "preview": "marko-run preview",
-    "start": "node --enable-source-maps ./dist/index.mjs"
+    "@marko/vite": "^4.1.16",
+    "vite": "^5.4.0"
   }
 }

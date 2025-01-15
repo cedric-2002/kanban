@@ -1,0 +1,44 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #0f325a;
+    transition: 0.3s;
+    overflow-x: hidden;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-content {
+    padding: 5px;
+    color: white;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .board-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  .board-name-input {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+    max-width: 150px;
+  }
+  

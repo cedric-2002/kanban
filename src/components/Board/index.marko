@@ -1,0 +1,14 @@
+import Columns from "../Columns/index.marko";
+import Menu from "../Menu/index.marko";
+import Filter from "../Filter/index.marko";
+
+<template>
+  <div class="board" ondrop("handleDrop") ondragover("allowDrop")>
+    <Menu />
+    <Filter />
+    <Columns />
+  </div>
+</template>
+
+<style src="./style.css" />
+<script src="./component.js" />

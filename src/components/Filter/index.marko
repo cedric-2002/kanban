@@ -1,0 +1,40 @@
+<template>
+  <div id="quick-filters">
+    <h2 class="quickfilter-title">Schnellfilter</h2>
+    <div class="quick-filter-buttons">
+      <for|filter| of=input.filters>
+        <if(filter.quickFilter)>
+          <button
+            class=["filter-btn", state.activeFilters.includes(filter.name) ? "active" : ""]
+            data-filter=filter.name
+            on-click('toggleFilter', filter.name)>
+            ${filter.name}
+          </button>
+        </if>
+      </for>
+    </div>
+  </div>
+
+  <div id="filter-container" style="display: ${state.showFilters ? 'block' : 'none'};">
+    <h2 class="filter-title">Filter</h2>
+    <div class="filter-buttons">
+      <for|filter| of=input.filters>
+        <if(!filter.quickFilter)>
+          <button
+            class=["filter-btn", state.activeFilters.includes(filter.name) ? "active" : ""]
+            data-filter=filter.name
+            on-click('toggleFilter', filter.name)>
+            ${filter.name}
+          </button>
+        </if>
+      </for>
+    </div>
+  </div>
+
+  <button class="toggle-filter-container" on-click('toggleFilterContainer')>
+    Filter ein/ausblenden
+  </button>
+</template>
+
+<style src="./style.css" />
+<script src="./component.js" />

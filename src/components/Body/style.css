@@ -1,0 +1,18 @@
+#content-wrapper {
+    display: flex;
+    transition: margin-left 0.3s ease;
+    width: 100%;
+  }
+  
+  #board-wrapper {
+    flex-grow: 1;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+  }
+  
+  #content-wrapper.shifted #board-wrapper {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+  
