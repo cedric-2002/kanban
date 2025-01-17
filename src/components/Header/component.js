@@ -1,4 +1,4 @@
-import ComponentState from "./ComponentState";
+const ComponentState = require("./ComponentState");
 
 module.exports = {
     onCreate(input) {

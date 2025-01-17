@@ -1,9 +1,26 @@
-import filters from "../Columns/data.json";
-  onMount() {
+const fs = require("fs");
+const path = require("path");
+
+// JSON richtig laden
+let filters = [];
+try {
+  const jsonPath = path.join(__dirname, "../Columns/data.json");
+  filters = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+} catch (error) {
+  console.error("Fehler beim Laden von data.json:", error);
+}
+
+class ComponentState {
+  constructor() {
     this.state = {
-      tickets: JSON.parse(localStorage.getItem('tickets'))?.Ticket || [],
+      tickets: [],
       activeFilters: []
     };
+  }
+
+  onMount() {
+    const storedTickets = JSON.parse(localStorage.getItem("tickets"))?.Ticket || [];
+    this.state.tickets = storedTickets;
   }
 
   openFilterModal(ticketID) {
@@ -30,12 +47,12 @@ import filters from "../Columns/data.json";
 
     this.state.tickets = updatedTickets;
 
-    localStorage.setItem(
-      'tickets',
-      JSON.stringify({ Ticket: updatedTickets })
-    );
+    localStorage.setItem("tickets", JSON.stringify({ Ticket: updatedTickets }));
 
     setTimeout(() => {
       alert("Filter erfolgreich gespeichert!");
     }, 500);
   }
+}
+
+module.exports = new ComponentState();

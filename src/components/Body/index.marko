@@ -2,11 +2,12 @@ import Header from "../Header/index.marko";
 import Footer from "../Footer/index.marko";
 import Board from "../Board/index.marko";
 import Sidebar from "../Sidebar/index.marko";
+$ const Component = require("./component.js");
 
 <template>
   <div>
     <Header />
-    <div id="content-wrapper" class=state.sidebarOpen ? 'shifted' : ''>
+    <div id="content-wrapper" class=(state.sidebarOpen ? 'shifted' : '')>
       <Sidebar on-toggleSidebar("toggleSidebar") />
       <div id="board-wrapper">
         <Board />
@@ -17,4 +18,3 @@ import Sidebar from "../Sidebar/index.marko";
 </template>
 
 <style src="./style.css" />
-<script src="./component.js" />

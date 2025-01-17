@@ -1,4 +1,4 @@
-export default class ComponentState {
+class ComponentState {
   constructor() {
     this.columns = [];
     this.boards = [];
@@ -21,3 +21,4 @@ export default class ComponentState {
     return this.columns;
   }
 }
+module.exports = ComponentState;

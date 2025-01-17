@@ -1,6 +1,6 @@
-import ComponentState from "./ComponentState";
+const ComponentState = require("./ComponentState");
 
-export default class {
+class Component {
     onMount() {
       this.state = {
         tickets: JSON.parse(localStorage.getItem('tickets'))?.Ticket || [],
@@ -37,5 +37,5 @@ export default class {
         JSON.stringify({ Ticket: updatedTickets })
       );
     }
-  }
-  
+}
+module.exports = Component;

@@ -13,7 +13,9 @@
             on-dragover("handleDragOver") 
             on-drop("handleDrop")
           >
-            <@Tickets column="Nicht zugewiesen" board="Nicht zugewiesene Tickets" />
+            <section class="tickets-container">
+              <Tickets column="Nicht zugewiesen" board="Nicht zugewiesene Tickets" />
+            </section>
           </div>
         </div>
       </div>
@@ -54,7 +56,7 @@
                   on-dragover("handleDragOver")
                   on-drop("handleDrop")
                 >
-                  <@Tickets column="${board.columns[columnName].name}" board="${board.Board}" />
+                  <Tickets column="${board.columns[columnName].name}" board="${board.Board}" />
                 </div>
               </div>
             </if>

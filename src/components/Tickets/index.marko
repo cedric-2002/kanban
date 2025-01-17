@@ -3,7 +3,7 @@
   <div
     class="ticket"
     draggable="true"
-    data-priority=${ticket.PriorityID}
+    data-priority="{ticket.PriorityID}"
     ondragstart("handleDragStart", ticket.TicketID)
     onclick("openFilterModal", ticket.TicketID)
   >
@@ -29,7 +29,7 @@
             >
               <option value="none">Kein Filter</option>
               <for|filter| of=filters.filters>
-                <option value=${filter.name}>
+                <option value="{filter.name}">
                   ${filter.name}
                 </option>
               </for>

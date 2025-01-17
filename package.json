@@ -7,7 +7,7 @@
     "dev": "node index.js"
   },
   "dependencies": {
-    "@marko/compiler": "^5.37.4",
+    "@marko/compiler": "^5.39.10",
     "@marko/express": "^2.1.0",
     "@marko/webpack": "^10.0.0",
     "compression": "^1.7.4",
@@ -19,7 +19,9 @@
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
+    "@marko/run": "^0.5.15",
     "@marko/vite": "^4.1.16",
     "vite": "^5.4.0"
-  }
+  },
+  "type": "commonjs"
 }
