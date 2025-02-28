@@ -1,23 +1,4 @@
 module.exports = {
-  onCreate() {
-    this.state = {
-      isOpen: false,  // Sidebar beginnt geschlossen
-      boards: [
-        { Board: "Projekt A" },
-        { Board: "Projekt B" },
-        { Board: "Projekt C" }
-      ],
-      columns: [
-        { name: "To Do" },
-        { name: "In Progress" },
-        { name: "Done" }
-      ],
-      filters: [
-        { name: "Wichtig" },
-        { name: "Bug" }
-      ]
-    };
-  },
 
   toggleSidebar() {
     this.state.isOpen = !this.state.isOpen;

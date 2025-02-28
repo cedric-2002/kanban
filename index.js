@@ -50,6 +50,9 @@ app.get('/', (req, res) => {
                 console.error("Fehler beim Rendern:", err);
                 return res.status(500).send("Render-Fehler: " + err.message);
             }
+            let renderedHTML = output.toString(); 
+            console.log("Gerendertes HTML:", renderedHTML);
+            res.send(renderedHTML);
         });
 
     } catch (error) {
@@ -57,6 +60,14 @@ app.get('/', (req, res) => {
         res.status(500).send("Fehler: " + error.message);
     }
 });
+
+app.use('/components', express.static(path.join(__dirname, 'src/components'), {
+    setHeaders: (res, path) => {
+        if (path.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        }
+    }
+}));
 
 // API: Ticket aktualisieren
 app.post('/update-ticket', (req, res) => {

@@ -30,6 +30,6 @@ module.exports = {
   },
 
   toggleSidebar() {
-    this.emit("toggleSidebar"); // Sendet Event an den übergeordneten Body
+    this.emit("toggleSidebar"); 
   }
 };

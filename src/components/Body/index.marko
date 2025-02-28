@@ -5,12 +5,6 @@ import Board from "../Board/index.marko";
 import Sidebar from "../Sidebar/index.marko";
 
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="/styles/Body/style.css">
-</head>
 <body>
 
     <!-- Header -->
@@ -40,10 +34,11 @@ import Sidebar from "../Sidebar/index.marko";
         };
     },
     toggleSidebar() {
-        console.log("🔄 Sidebar wird umgeschaltet.");
+        console.log("Sidebar wird umgeschaltet.");
         this.state.sidebarOpen = !this.state.sidebarOpen;
     }
 };
     </script>
 </body>
 </html>
+<link rel="stylesheet" href="/styles/Body/style.css">

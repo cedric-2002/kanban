@@ -5,6 +5,7 @@
     padding: 1rem;
     font-family: Arial, sans-serif;
     font-size: 0.9rem;
+    margin-bottom: 10px;
   }
   
   .footer-links {
@@ -16,9 +17,11 @@
     text-decoration: none;
     margin: 0 10px;
     transition: color 0.3s ease;
+    
   }
   
   .footer-links a:hover {
     color: #ffffff;
   }
+
   

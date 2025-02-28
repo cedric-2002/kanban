@@ -19,7 +19,7 @@ module.exports = {
   loadData() {
     const filePath = path.join(__dirname, "../../data/kanban.json");
     if (!fs.existsSync(filePath)) {
-      console.warn("⚠️ WARNUNG: Kanban-Daten nicht gefunden! Erstelle eine leere Datei.");
+      console.warn("Kanban-Daten nicht gefunden! Erstelle eine leere Datei.");
       fs.writeFileSync(filePath, JSON.stringify({ boards: [] }, null, 2));
     }
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
