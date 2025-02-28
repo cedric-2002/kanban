@@ -14,15 +14,22 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware
-app.use(compressionMiddleware());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/static', express.static(path.join(__dirname, '/src/components')));
-app.use('/components', express.static(path.join(__dirname, 'src/components')));
-app.use('/src', express.static(path.join(__dirname, 'src')));
-app.use(express.static(path.join(__dirname, "public")));
+// Statische Dateien bereitstellen
 app.use("/styles", express.static(path.join(__dirname, "src/components")));
+app.use("/scripts", express.static(path.join(__dirname, "src/components"), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".js")) {
+            res.setHeader("Content-Type", "application/javascript");
+        }
+    }
+}));
+
+
+console.log("Statische Dateien bereitgestellt:");
+console.log("/static → 'public/'");
+console.log("/styles → 'src/components/'");
+console.log("/scripts → 'public/scripts/'");
+
 app.use(markoMiddleware());
 
 // Funktion zum Laden der Kanban-Daten
@@ -50,7 +57,7 @@ app.get('/', (req, res) => {
                 console.error("Fehler beim Rendern:", err);
                 return res.status(500).send("Render-Fehler: " + err.message);
             }
-            let renderedHTML = output.toString(); 
+            let renderedHTML = output.toString();
             console.log("Gerendertes HTML:", renderedHTML);
             res.send(renderedHTML);
         });
@@ -60,14 +67,6 @@ app.get('/', (req, res) => {
         res.status(500).send("Fehler: " + error.message);
     }
 });
-
-app.use('/components', express.static(path.join(__dirname, 'src/components'), {
-    setHeaders: (res, path) => {
-        if (path.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        }
-    }
-}));
 
 // API: Ticket aktualisieren
 app.post('/update-ticket', (req, res) => {
@@ -105,7 +104,6 @@ app.post('/save-columns', (req, res) => {
         res.status(500).json({ success: false });
     }
 });
-
 
 // Server starten
 app.listen(PORT, () => {

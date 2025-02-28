@@ -1,35 +1,27 @@
-class ComponentState {
-  constructor() {
-    this.columns = [];
-    this.boards = [];
-    this.filters = [];
-  }
-
-  addBoard(board) {
-    this.boards.push(board);
-  }
-
-  addFilter(filter) {
-    this.filters.push(filter);
-  }
-
-  setColumns(columns) {
-    this.columns = columns;
-  }
-
-  getColumns() {
-    return this.columns;
-  }
-}
-
 module.exports = {
   onCreate(input) {
     this.state = {
-      title: input.title || "Kanban Board"
+      title: input.title || "Kanban Board",
+      sidebarOpen: false
     };
   },
 
+  onMount() {
+    // DOM-Manipulation nur im Browser ausführen!
+    if (typeof window !== "undefined") {
+      console.log("Header Component geladen!");
+
+      const toggleButton = document.getElementById("toggleSidebar");
+      if (toggleButton) {
+        toggleButton.addEventListener("click", () => {
+          this.toggleSidebar();
+        });
+      }
+    }
+  },
+
   toggleSidebar() {
-    this.emit("toggleSidebar"); 
+    console.log("Sidebar wird umgeschaltet.");
+    this.state.sidebarOpen = !this.state.sidebarOpen;
   }
 };

@@ -1,4 +1,3 @@
-const ComponentState = require("./ComponentState");
 
 module.exports = class {
   onCreate(input) {
