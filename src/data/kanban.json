@@ -1,0 +1,29 @@
+{
+  "boards": [
+    {
+      "id": 1,
+      "name": "Projekt A",
+      "columns": [
+        { "id": 101, "name": "To Do" },
+        { "id": 102, "name": "In Progress" },
+        { "id": 103, "name": "Done" }
+      ],
+      "filters": [
+        { "id": 201, "name": "Wichtig" },
+        { "id": 202, "name": "Bug" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Projekt B",
+      "columns": [
+        { "id": 104, "name": "Backlog" },
+        { "id": 105, "name": "Review" },
+        { "id": 106, "name": "Deployment" }
+      ],
+      "filters": [
+        { "id": 203, "name": "Feature" }
+      ]
+    }
+  ]
+}

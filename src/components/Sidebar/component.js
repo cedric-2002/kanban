@@ -1,87 +1,74 @@
-const ComponentState = require("./ComponentState");
-const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   onCreate(input) {
-    this.state = new ComponentState();
-    this.loadInitialData();
+    const allData = this.loadData();
+    const boardId = input.boardId || 1; // Standardmäßig Board 1 laden
+    const boardData = allData.boards.find(board => board.id === boardId);
+
+    this.state = {
+      boards: allData.boards,
+      selectedBoard: boardData || null,
+      columns: boardData ? boardData.columns : [],
+      filters: boardData ? boardData.filters : [],
+      isOpen: false
+    };
   },
 
-  loadInitialData() {
-    const jsonPath = path.join(__dirname, "../Columns/data.json");
+  loadData() {
+    const filePath = path.join(__dirname, "../../data/kanban.json");
+    if (!fs.existsSync(filePath)) {
+      console.warn("⚠️ WARNUNG: Kanban-Daten nicht gefunden! Erstelle eine leere Datei.");
+      fs.writeFileSync(filePath, JSON.stringify({ boards: [] }, null, 2));
+    }
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  },
 
-    let data;
-    try {
-      const rawData = fs.readFileSync(jsonPath, "utf8");
-      data = JSON.parse(rawData);
+  saveData(data) {
+    const filePath = path.join(__dirname, "../../data/kanban.json");
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+  },
 
-      
-      if (!data || typeof data !== "object" || !Array.isArray(data.columns)) {
-        console.error("Warnung: `data.columns` nicht gefunden, Initialisiere mit Standardwert.");
-        data = { columns: [], filters: [] };
-      }
-
-     
-      const flattenedColumns = data.columns.flatMap(board => {
-        if (!board.columns || typeof board.columns !== "object") {
-          console.warn(`Warnung: Board "${board.Board || "Unbekannt"}" hat keine gültigen columns.`);
-          return []; 
-        }
-        return Object.values(board.columns);
-      });
-
-      this.state.loadData({ columns: flattenedColumns, filters: data.filters || [] });
-
-    } catch (error) {
-      console.error("Fehler beim Laden der JSON-Datei:", error);
-      this.state.loadData({ columns: [], filters: [] });
+  changeBoard(event, boardId) {
+    const allData = this.loadData();
+    const newBoard = allData.boards.find(b => b.id === boardId);
+    if (newBoard) {
+      this.state.selectedBoard = newBoard;
+      this.state.columns = newBoard.columns;
+      this.state.filters = newBoard.filters;
     }
   },
 
   addBoard() {
-    this.state.addBoard();
-    this.saveDataToServer();
-  },
-
-  deleteBoard(index) {
-    this.state.deleteBoard(index);
-    this.saveDataToServer();
-  },
-
-  addFilter() {
-    this.state.addFilter();
-    this.saveDataToServer();
-  },
-
-  deleteFilter(index) {
-    this.state.deleteFilter(index);
-    this.saveDataToServer();
+    const newBoardName = prompt("Name des neuen Boards:");
+    if (newBoardName) {
+      const allData = this.loadData();
+      const newBoard = {
+        id: Date.now(),
+        name: newBoardName,
+        columns: [],
+        filters: []
+      };
+      allData.boards.push(newBoard);
+      this.saveData(allData);
+      this.state.boards = allData.boards;
+    }
   },
 
   addColumn() {
-    this.state.addColumn();
-    this.saveDataToServer();
-  },
-
-  deleteColumn(index) {
-    this.state.deleteColumn(index);
-    this.saveDataToServer();
-  },
-
-  saveDataToServer() {
-    const jsonPath = path.join(__dirname, "../Columns/data.json");
-
-    const dataToSave = {
-      columns: this.state.boards || [],  
-      filters: this.state.filters || []
-    };
-
-    try {
-      fs.writeFileSync(jsonPath, JSON.stringify(dataToSave, null, 2));
-      console.log("Daten erfolgreich gespeichert.");
-    } catch (error) {
-      console.error("Fehler beim Speichern der Daten:", error);
+    const newColumnName = prompt("Name der neuen Spalte:");
+    if (newColumnName) {
+      this.state.selectedBoard.columns.push({ id: Date.now(), name: newColumnName });
+      this.saveData(this.loadData());
     }
   },
+
+  addFilter() {
+    const newFilterName = prompt("Name des neuen Filters:");
+    if (newFilterName) {
+      this.state.selectedBoard.filters.push({ id: Date.now(), name: newFilterName });
+      this.saveData(this.loadData());
+    }
+  }
 };

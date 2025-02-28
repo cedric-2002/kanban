@@ -1,9 +1,20 @@
 .header {
-    overflow: hidden;
-    background-color: #0F325A;
-    padding: 20px 10px;
-    text-align: center;
-    color: #78be5a;
-    font-family: "Montserrat", sans-serif;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #091e42;
+  color: white;
+  padding: 10px 20px;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.settings-btn:hover {
+  color: #78be5a;
+}
