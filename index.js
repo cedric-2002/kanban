@@ -1,20 +1,39 @@
-require('@marko/compiler/register'); 
+require('@marko/compiler/register');
 const express = require('express');
-const compressionMiddleware = require('compression');
 const path = require('path');
 const fs = require('fs');
 const markoMiddleware = require('@marko/express').default;
 const markoTemplate = require('./src/components/Body/index.marko').default;
+const lasso = require('lasso');
 
 const app = express();
 const PORT = 3000;
 
+// Lasso-Konfiguration für Asset-Bundling
+lasso.configure({
+    outputDir: path.join(__dirname, "public/static"),
+    urlPrefix: "/static",
+    fingerprintsEnabled: false,
+    bundlingEnabled: true,
+    minify: true,
+    require: {
+        transforms: [
+            {
+                transform: "lasso-marko",
+                config: {}
+            }
+        ]
+    }
+});
+
+// Logging aller Anfragen
 app.use((req, res, next) => {
     console.log(`Anfrage: ${req.method} ${req.url}`);
     next();
 });
 
 // Statische Dateien bereitstellen
+app.use("/static", express.static(path.join(__dirname, "public/static")));
 app.use("/styles", express.static(path.join(__dirname, "src/components")));
 app.use("/scripts", express.static(path.join(__dirname, "src/components"), {
     setHeaders: (res, filePath) => {
@@ -24,29 +43,33 @@ app.use("/scripts", express.static(path.join(__dirname, "src/components"), {
     }
 }));
 
-
 console.log("Statische Dateien bereitgestellt:");
-console.log("/static → 'public/'");
+console.log("/static → 'public/static/'");
 console.log("/styles → 'src/components/'");
-console.log("/scripts → 'public/scripts/'");
+console.log("/scripts → 'src/components/'");
 
 app.use(markoMiddleware());
 
-// Funktion zum Laden der Kanban-Daten
-function getKanbanData() {
-    const dataPath = path.join(__dirname, 'src/components/Columns/data.json');
-    if (!fs.existsSync(dataPath)) {
-        console.error("⚠️ WARNUNG: Daten-Datei nicht gefunden, erstelle eine leere Datei.");
-        fs.writeFileSync(dataPath, JSON.stringify({ columns: [], filters: [] }, null, 2));
+// API zum Laden der Kanban-Daten (statt `fs` in `.marko`)
+app.get('/api/get-kanban-data', (req, res) => {
+    try {
+        const dataPath = path.join(__dirname, 'src/components/Columns/data.json');
+        if (!fs.existsSync(dataPath)) {
+            console.warn("WARNUNG: Daten-Datei nicht gefunden, erstelle eine leere Datei.");
+            fs.writeFileSync(dataPath, JSON.stringify({ columns: [], filters: [] }, null, 2));
+        }
+        const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        res.json(data);
+    } catch (error) {
+        console.error("Fehler beim Laden der Daten:", error);
+        res.status(500).json({ error: "Fehler beim Laden der Kanban-Daten." });
     }
-    return JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-}
+});
 
-// Route für die Hauptseite
+// Route für die Hauptseite (Fehlerbehandlung verbessert)
 app.get('/', (req, res) => {
     try {
         console.log("Marko-Template wird gerendert...");
-        console.log("Template:", markoTemplate);
 
         if (typeof markoTemplate.render !== 'function') {
             throw new Error("`render` ist keine Funktion. Ist die Marko-Datei korrekt importiert?");
@@ -55,21 +78,24 @@ app.get('/', (req, res) => {
         markoTemplate.render({}, (err, output) => {
             if (err) {
                 console.error("Fehler beim Rendern:", err);
-                return res.status(500).send("Render-Fehler: " + err.message);
+                if (!res.headersSent) {
+                    return res.status(500).send("Render-Fehler: " + err.message);
+                }
+                return;
             }
-            let renderedHTML = output.toString();
-            console.log("Gerendertes HTML:", renderedHTML);
-            res.send(renderedHTML);
+            res.send(output.toString());
         });
 
     } catch (error) {
         console.error("Fehler beim Rendern des Marko-Templates:", error);
-        res.status(500).send("Fehler: " + error.message);
+        if (!res.headersSent) {
+            res.status(500).send("Fehler: " + error.message);
+        }
     }
 });
 
 // API: Ticket aktualisieren
-app.post('/update-ticket', (req, res) => {
+app.post('/update-ticket', express.json(), (req, res) => {
     const { ticketId, newColumnId, newBoard, newFilters } = req.body;
     const ticketsPath = path.join(__dirname, 'src/components/Tickets/tickets.json');
 
@@ -92,7 +118,7 @@ app.post('/update-ticket', (req, res) => {
 });
 
 // API: Spalten speichern
-app.post('/save-columns', (req, res) => {
+app.post('/save-columns', express.json(), (req, res) => {
     const { columns, filters } = req.body;
     const jsonPath = path.join(__dirname, 'src/components/Columns/data.json');
 

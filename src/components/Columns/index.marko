@@ -1,3 +1,7 @@
+<lasso-page name="columns" package-path="./browser.json"/>
+
+import Tickets from "../Tickets/index.marko";
+
 <template>
   <div id="special-board">
     <div class="board-container">
@@ -28,7 +32,9 @@
         <div class="board-header">
           <h2 class="board-title">${board.Board}</h2>
           <if(board.maxTickets !== "unbegrenzt")>
-            <span class="board-max-tickets" data-max-tickets="${board.maxTickets}">Max Tickets: ${board.maxTickets}</span>
+            <span class="board-max-tickets" data-max-tickets="${board.maxTickets}">
+              Max Tickets: ${board.maxTickets}
+            </span>
           </if>
         </div>
         <div class="kanban-board">
@@ -45,7 +51,9 @@
                     ${board.columns[columnName].name}
                     <span class="sort-indicator">↕</span>
                     <if(board.columns[columnName].maxTickets !== "unbegrenzt")>
-                      <span class="column-max-tickets" data-max-tickets="${board.columns[columnName].maxTickets}">Max: ${board.columns[columnName].maxTickets}</span>
+                      <span class="column-max-tickets" data-max-tickets="${board.columns[columnName].maxTickets}">
+                        Max: ${board.columns[columnName].maxTickets}
+                      </span>
                     </if>
                   </button>
                 </div>
@@ -68,4 +76,3 @@
 </template>
 
 <link rel="stylesheet" href="/styles/Columns/style.css">
-<script src="/scripts/Columns/component.js" defer></script>

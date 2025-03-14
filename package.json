@@ -1,26 +1,33 @@
 {
   "name": "kanban",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cedric-2002/kanban.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cedric-2002/kanban/issues"
+  },
+  "homepage": "https://github.com/cedric-2002/kanban#readme",
   "dependencies": {
-    "@marko/compiler": "^5.39.12",
+    "@lasso/marko-taglib": "^2.0.6",
+    "@marko/babel-utils": "^6.6.3",
+    "@marko/compiler": "^5.39.13",
     "@marko/express": "^2.1.0",
-    "@marko/webpack": "^10.0.0",
-    "compression": "^1.7.4",
-    "css-loader": "^7.1.2",
-    "express": "^4.19.2",
-    "marko": "^5.37.18",
-    "style-loader": "^4.0.0",
-    "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "devDependencies": {
-    "@marko/run": "^0.5.15",
-    "@marko/vite": "^4.1.16",
-    "vite": "^5.4.0"
+    "compression": "^1.8.0",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "lasso-marko": "^3.2.1",
+    "marko": "^5.37.20",
+    "path": "^0.12.7"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "dependencies": [
+    "require: ./component.js",
+    "require: ./style.css"
+  ]
+}

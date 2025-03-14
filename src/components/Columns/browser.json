@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "require: ../Tickets/index.marko",
+    "require: ./component.js",
+    "require: ./style.css"
+  ]
+}

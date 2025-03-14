@@ -1,3 +1,5 @@
+<lasso-page name="kanban-board" package-path="./browser.json"/>
+
 $ const Component = require("./component.js");
 import Header from "../Header/index.marko";
 import Footer from "../Footer/index.marko";
@@ -24,22 +26,26 @@ import Sidebar from "../Sidebar/index.marko";
     <Footer/>
 
     <script>
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            document.getElementById("content-wrapper").classList.toggle("shifted");
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("toggleSidebar").addEventListener("click", function () {
+                document.getElementById("content-wrapper").classList.toggle("shifted");
+            });
         });
-      module.exports = {
-    onCreate() {
-        this.state = {
-            sidebarOpen: false
+
+        module.exports = {
+            onCreate() {
+                this.state = {
+                    sidebarOpen: false
+                };
+            },
+            toggleSidebar() {
+                console.log("Sidebar wird umgeschaltet.");
+                this.state.sidebarOpen = !this.state.sidebarOpen;
+            }
         };
-    },
-    toggleSidebar() {
-        console.log("Sidebar wird umgeschaltet.");
-        this.state.sidebarOpen = !this.state.sidebarOpen;
-    }
-};
     </script>
+
 </body>
 </html>
+
 <link rel="stylesheet" href="/styles/Body/style.css">
-<script src="/scripts/Body/component.js" defer></script>

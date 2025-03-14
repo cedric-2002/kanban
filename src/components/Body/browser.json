@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "require: ./component.js",
+    "require: ../Header/index.marko",
+    "require: ../Footer/index.marko",
+    "require: ../Board/index.marko",
+    "require: ../Sidebar/index.marko"
+  ]
+}

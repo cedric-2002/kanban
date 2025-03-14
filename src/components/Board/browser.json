@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "require: ./component.js",
+    "require: ../Columns/index.marko",
+    "require: ../Filter/index.marko"
+  ]
+}

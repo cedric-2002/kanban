@@ -7,21 +7,33 @@ module.exports = {
   },
 
   onMount() {
-    // DOM-Manipulation nur im Browser ausführen!
-    if (typeof window !== "undefined") {
-      console.log("Header Component geladen!");
+    console.log("✅ Header Component wurde geladen!");
 
-      const toggleButton = document.getElementById("toggleSidebar");
-      if (toggleButton) {
-        toggleButton.addEventListener("click", () => {
-          this.toggleSidebar();
-        });
-      }
+    const toggleButton = document.querySelector(".settings-btn");
+    console.log("🔍 Toggle-Button gefunden:", toggleButton);
+
+    if (toggleButton) {
+      toggleButton.addEventListener("click", () => {
+        console.log("🟢 Zahnrad wurde geklickt!");
+        this.toggleSidebar();
+      });
+    } else {
+      console.error("❌ Fehler: Toggle-Button nicht gefunden!");
     }
   },
 
   toggleSidebar() {
-    console.log("Sidebar wird umgeschaltet.");
+    console.log("🔄 Sidebar wird umgeschaltet...");
     this.state.sidebarOpen = !this.state.sidebarOpen;
+
+    const sidebar = document.querySelector("#content-wrapper");
+    console.log("📌 Sidebar-Element:", sidebar);
+
+    if (sidebar) {
+      sidebar.classList.toggle("shifted", this.state.sidebarOpen);
+    } else {
+      console.error("❌ Fehler: Sidebar nicht gefunden!");
+    }
   }
 };
+console.log("component.js wurde geladen!");
