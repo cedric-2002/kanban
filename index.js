@@ -9,18 +9,22 @@ const lasso = require('lasso');
 const app = express();
 const PORT = 3000;
 
-// Lasso korrekt konfigurieren für Asset-Bundling
+// Lasso-Konfiguration für Asset-Bundling
 lasso.configure({
-    plugins: ["lasso-marko"], // Richtige Einbindung des Marko-Plugins
     outputDir: path.join(__dirname, "public/static"),
     urlPrefix: "/static",
-    fingerprintsEnabled: true, // Caching für optimierte Performance aktivieren
+    fingerprintsEnabled: false,
     bundlingEnabled: true,
-    minify: true
+    minify: true,
+    require: {
+        transforms: [
+            {
+                transform: "lasso-marko",
+                config: {}
+            }
+        ]
+    }
 });
-
-// Middleware für Lasso hinzufügen
-app.use(require("lasso/middleware").serveStatic());
 
 // Logging aller Anfragen
 app.use((req, res, next) => {
@@ -46,7 +50,7 @@ console.log("/scripts → 'src/components/'");
 
 app.use(markoMiddleware());
 
-// API zum Laden der Kanban-Daten
+// API zum Laden der Kanban-Daten (statt `fs` in `.marko`)
 app.get('/api/get-kanban-data', (req, res) => {
     try {
         const dataPath = path.join(__dirname, 'src/components/Columns/data.json');
@@ -62,7 +66,7 @@ app.get('/api/get-kanban-data', (req, res) => {
     }
 });
 
-// Route für die Hauptseite
+// Route für die Hauptseite (Fehlerbehandlung verbessert)
 app.get('/', (req, res) => {
     try {
         console.log("Marko-Template wird gerendert...");
