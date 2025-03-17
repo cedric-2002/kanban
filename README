@@ -11,3 +11,32 @@ Verwendete Technologien & Versionen
 	•	compression (^1.8.0)
 	•	fs (^0.0.1-security)
 	•	path (^0.12.7)
+
+
+marko-app@1.0.0 /Users/cedric/marko-app
+├── @babel/core@7.26.10
+├── @babel/preset-env@7.26.9
+├── @babel/register@7.25.9
+├── @lasso/marko-taglib@2.0.6
+├── @marko/babel-utils@6.6.3
+├── @marko/compiler@5.39.13
+├── @marko/express@2.1.0
+├── browser-refresh-taglib@1.2.1
+├── browser-refresh@1.7.3
+├── express@4.21.2
+├── lasso-marko@3.2.1
+├── lasso@4.0.4
+└── marko@5.37.20 
+
+mein Projekt: 
+kanban@1.0.0 /Users/cedric/Desktop/Kanban
+├── @lasso/marko-taglib@2.0.6
+├── @marko/babel-utils@6.6.3
+├── @marko/compiler@5.39.13
+├── @marko/express@2.1.0
+├── compression@1.8.0
+├── express@4.21.2
+├── fs@0.0.1-security
+├── lasso-marko@3.2.1
+├── marko@5.37.20
+└── path@0.12.7
