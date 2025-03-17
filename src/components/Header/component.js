@@ -9,8 +9,8 @@ module.exports = {
   onMount() {
     console.log("Header Component wurde geladen!");
 
-    const toggleButton = document.querySelector(".settings-btn");
-    console.log("🔍 Toggle-Button gefunden:", toggleButton);
+    const toggleButton = document.getElementById("toggleSidebar");
+    console.log(" Toggle-Button gefunden:", toggleButton);
 
     if (toggleButton) {
       toggleButton.addEventListener("click", () => {
